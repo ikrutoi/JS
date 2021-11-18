@@ -2,7 +2,7 @@ const speech = prompt('Введите пожалуйста строку');
 let sum = 0;
 
 function searchVowel(sp) {
-  for (let i = 0; sp[i] != undefined; i++) {
+  for (let i = 0; i < sp.length; i++) {
     if (sp[i] == 'а' || sp[i] == 'А' ||
       sp[i] == 'е' || sp[i] == 'Е' ||
       sp[i] == 'ё' || sp[i] == 'Ё' ||
@@ -16,5 +16,4 @@ function searchVowel(sp) {
 }
 
 searchVowel(speech);
-
-console.log(sum)
+console.log(sum);
