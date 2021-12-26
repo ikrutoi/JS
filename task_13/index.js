@@ -1,27 +1,153 @@
-class HashStorageFunc {
-    
-    constructor(nameDrink) {
-        console.log(nameDrink);
-    }
-    
-    addValue(key, value) {
-        this.key = value;
-    } 
-    
-    getValue(key) {
-        
-    }
-    
-    deleteValue(key) {
-        
-    }
-    
-    getKeys() {
-        alert('Перечень всех напитков: ${this.name}');
-    }
-}
+let drink = {};
 
-const nameDrink = prompt('Введите название напитка');
-const onOffAlcohol = confirm('Напиток алкогольный или нет?');
-const recept = prompt('Введите рецепт напитка');
-const drink = new HashStorageFunc();
+class HashStorageFunc {
+  
+  addValue(key, value) {
+    drink[key] = value;
+  };
+
+  getValue(key) {
+    return drink[key]
+  };
+
+  deleteValue(key) {
+    if (key in drink) {
+      delete drink[key];
+      return true
+    } 
+    else {
+      return false
+  }
+  };
+
+  getKeys() {
+    const arrNameDrink = Object.keys(drink);
+    console.log(arrNameDrink);
+    const b = arrNameDrink.forEach(elem => (elem+=' '));
+    console.log(b);
+    return b
+  }
+
+};
+
+let drinkStorage = new HashStorageFunc();
+
+function addDrink() {
+  const name = prompt('Введите название напитка');
+  const alcohol = confirm('Напиток алкогольный?');
+  const recept = prompt('Введите рецепт напитка');
+
+  drinkStorage.addValue(name, {alcohol: alcohol, recept: recept});
+};
+
+function getDrink() {
+  const nameDrink = prompt('Введите название напитка');
+  const infoDrink = drinkStorage.getValue(nameDrink);
+  let alc;
+    
+  if (infoDrink == undefined)
+    alert('Запрашиваемого напитка в списке нет!!');
+  else {
+    if (infoDrink.alcohol)
+      alc = "да!!";
+    else 
+      alc = "нет!!";
+      
+    alert(`Информация о напитке "${nameDrink}" следующая:
+    содержит алкоголь: ${alc},
+    рецепт: ${infoDrink.recept}`);
+  } 
+}  
+
+function deleteDrink() {
+  const nameDrink = prompt('Какой напиток удалить?')
+  const deleteDrink = drinkStorage.deleteValue(nameDrink);
+
+  if (deleteDrink) 
+    alert('Напиток удален!!');
+  else
+    alert('Запрашиваемого напитка в списке нет!!');
+};
+
+function getNameDrink() {
+  const nameDrink = drinkStorage.getKeys();
+  alert(`Список напитков: ${nameDrink}`);
+};
+
+document.querySelector('.add_info').onclick = addDrink;
+document.querySelector('.get_info').onclick = getDrink;
+document.querySelector('.delete_info').onclick = deleteDrink;
+document.querySelector('.get_all_drink').onclick = getNameDrink;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function HashStorageFunc(){
+//   var storage={};
+//     this.addValue=function(key, value){
+//       storage [key]=value;
+//     };
+//     this.getValue=function(key){
+//       return storage[key];
+//     };
+//     this.deleteValue=function(key){
+//       if(key in storage){
+//         delete storage[key];
+//       return true;
+//       }
+//       return false;
+//     };
+//     this.getKeys=function(){
+//       return Object.keys(
+//         storage
+//       );
+//     };
+// }
+
+// var drinkStorage=new HashStorageFunc();
+
+// function addInfo(){
+//   var name = prompt('Введите название напитка!');
+//   var alco = confirm('Содержит алкоголь?'); //сдесь была ошибка!!!!! почемуто я задал var drink, а спрашивал alco
+//   var reci = prompt('Введите рецепт приготовления!');
+//   var count = prompt('Введите страну происхождения!');
+
+//   drinkStorage.addValue(name, {a: alco, r: reci, c: count});
+// }
+
+// function getInfo(){
+//   var name = prompt('Введите название напитка, о котором хотите получить информацию!');
+//   var rem = drinkStorage.getValue(name);
+//     if (rem !== undefined){
+//       alert(
+//         "Напиток: " +name+ '\n' +
+//         "Содержание алкоголя: " +(rem.a?"Содержит":"Не Содержит")+ '\n' +
+//         "Рецепт: " +rem.r+ '\n' + 
+//         "Страна происхождения:" +rem.c+ '\n'
+//       );
+//     }
+//     else {
+//       alert("Нет такого напитка в списке)");      
+//     }
+// }
+
+// function delInfo(){  
+//   var name = prompt('Введите название напитка, который хотите удалить');
+//   var del = drinkStorage.deleteValue(name);
+  
+//   alert(del?"Напиток успешно удален!":"Нет такого напитка в списке)"); 
+// }
+
+// function listDrink(){
+//   var list = drinkStorage.getKeys();
+//     alert("Список: " + list);
+// }
