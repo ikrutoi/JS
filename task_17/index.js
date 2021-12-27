@@ -53,5 +53,3 @@ let sumReduce = arr.reduce((summa, it) =>
   it == 'э' || it == 'Э' ||
   it == 'ю' || it == 'Ю' ||
   it == 'я' || it == 'Я'), 0);
-
-console.log(sumReduce);
